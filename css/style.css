@@ -1,0 +1,169 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  background-color: rgb(235,236,230);
+  height: 100%;
+}
+
+.top_container {
+  width: 100%;
+  height: 100%;
+  max-height: 80vw;
+  overflow: hidden;
+}
+
+.lost_church_container {
+  position: relative;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgb(6,34,55);
+}
+.lost_church_background {
+  position: relative;
+  top: 0%;
+  left: 0%;
+  width: 103%;
+  height: 103%;
+}
+
+.lost_church_anton {
+  position: absolute;
+  top: 2.44%;
+  left: 38.8%;
+  width: 50.1%;
+  height:auto;
+}
+.lost_church_andrea {
+  position: absolute;
+  top: 14.2%;
+  left: 18.6%;
+  width: 90.4%;
+  height:auto;
+}
+
+.lost_church_dean {
+  position: absolute;
+  top: 4.4%;
+  left: 74.2%;
+  width: 25.8%;
+  height:auto;
+}
+
+.lost_church_reuben {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 30.25%;
+  height:auto;
+}
+
+@font-face{
+    font-family: "ZnikomitNo24Thin";
+    src: url('../res/fonts/ZnikomitNo24Thin.otf')
+}
+
+.ampersand_logo_container {
+  position: relative;
+  font-size: 12vw;
+  font-family: ZnikomitNo24Thin;
+  text-align: center;
+  color: white;
+  padding-top: 7vw;
+  padding-bottom: 7vw;
+  background-color: rgb(16, 177, 159);
+}
+
+@media screen and (min-width: 1000px) {
+    .ampersand_logo_container
+    {
+      font-size: 120px;
+      padding-top: 70px;
+      padding-bottom: 70px;
+    }
+}
+
+#dot_canvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom:0;
+  z-index: 0;
+}
+
+@media screen and (min-width: 1000px) {
+
+  #dot_canvas {
+    width: 1000px;
+    margin: 0 auto;
+  }
+}
+.about_container {
+  font-family: Verdana;
+  text-align: center;
+  padding-top: 7vw;
+  padding-bottom: 3vw;
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
+.about_content {
+  padding-bottom: 6px;
+}
+
+.banana_container {
+  padding-top: 1vw;
+  text-align: center;
+  padding-bottom: 3vw;
+}
+
+.banana {
+  width: 60vw;
+  max-width: 1000px;
+}
+
+.bottom_bar {
+    position: fixed;
+    z-index: 100;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 700px;
+}
+
+.mailchimp_container {
+    position: fixed;
+    z-index: 200;
+    bottom: 0px;
+    right: 20px;
+    left: auto;
+    top: auto;
+    width: 250px;
+    height: 150px;
+}
+.hidden { visibility: hidden; }
+
+.bottom_space {
+  height: 200px;
+}
+
+@media screen and (min-width: 700px) {
+  .bottom_bar {
+    margin: 0 auto;
+  }
+}
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

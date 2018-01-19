@@ -1,0 +1,293 @@
+<html>
+ <head>
+ <meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/animate.css">
+<script src="js/jquery-3.2.1.js"></script>
+</head> 
+<body>
+
+<div class="top_container">
+<div class="lost_church_container">
+
+<img class="lost_church_background" src="res/lost_church_layers/lost_church_background.png" />
+<img class="lost_church_anton" src="res/lost_church_layers/lost_church_anton.png" />
+<img class="lost_church_reuben" src="res/lost_church_layers/lost_church_reuben.png" />
+<img class="lost_church_dean" src="res/lost_church_layers/lost_church_dean.png" />
+<img class="lost_church_andrea" src="res/lost_church_layers/lost_church_andrea.png" />
+
+</div>
+</div>
+
+<div class="ampersand_logo_container">
+<canvas id="dot_canvas" width="400" height="300">
+</canvas>
+<div class="ampersand_logo_content unselectable">
+	ampersand
+</div>
+</div>
+<div class="about_container">
+<div class="about_content">
+
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+<p>Mauris egestas ipsum arcu, sed scelerisque tortor eleifend vitae.
+Etiam lacinia sollicitudin nulla vel ultrices. Vivamus ornare nisi et
+congue vestibulum. Maecenas pulvinar, dolor sit amet dignissim
+venenatis, lectus turpis porta enim.</p>
+
+<p>Curabitur vitae leo sed velit tincidunt pulvinar euismod et elit.
+Suspendisse sit amet efficitur orci. Aenean nec convallis nisl.
+Ut molestie odio ac nisl consectetur mollis. Orci varius natoque
+penatibus et maggyytttppgnis!</p>
+
+</div>
+</div>
+<div class="banana_container">
+<img class="banana" src="res/combined_ampersands.png" />
+</div>
+<div class="bottom_space">
+</div>
+
+<div class="mailchimp_container hidden">
+<!-- Begin MailChimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+    #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif;  width:250px;}
+    /* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+       We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://ampersandtheband.us17.list-manage.com/subscribe/post?u=db1d237bcea8cd062ad3b5a46&amp;id=d4763e67d0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+    <label for="mce-EMAIL">Subscribe to our mailing list</label>
+    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_db1d237bcea8cd062ad3b5a46_d4763e67d0" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+</div>
+<div class="bottom_bar">
+<iframe style="border: 0; width: 100%; height: 42px;" src="https://bandcamp.com/EmbeddedPlayer/track=1322369603/size=small/bgcol=ffffff/linkcol=0687f5/artwork=none/transparent=true/" seamless><a href="http://ampersand-sf.bandcamp.com/track/tiny-bones">Tiny Bones by Ampersand</a></iframe>
+</div>
+<script>
+
+function lerp(value1, value2, amount) {
+	amount = amount < 0 ? 0 : amount;
+	amount = amount > 1 ? 1 : amount;
+	return value1 + (value2 - value1) * amount;
+};
+
+function updateLostChurchLayers(fx, fy) {
+	$(".lost_church_background").css(
+		{"left": lerp(-0.03, 0, fx) * 100 + "%",
+		"top":lerp(-0.03, 0, fy) * 100 + "%"
+	});
+	$(".lost_church_anton").css(
+		{"left": lerp(0.25, 0.26, fx) * 100 + "%",
+		"top":lerp(-0.19, -0.17, fy) * 100 + "%"
+	});
+	$(".lost_church_reuben").css(
+		{"left": lerp(-0.05, 0.0, fx) * 100 + "%",
+		"top":lerp(0.0, 0.05, fy) * 100 + "%"
+	});
+	$(".lost_church_andrea").css(
+		{"left": lerp(0.13, 0.2, fx) * 100 + "%",
+		"top":lerp(0.13, 0.2, fy) * 100 + "%"
+	});
+	$(".lost_church_dean").css(
+		{"left": lerp(0.79, 0.83, fx) * 100 + "%",
+		"top":lerp(0.05, 0.1, fy) * 100 + "%"
+	});
+}
+
+var targetMouseFX = 0.5;
+var targetMouseFY = 0.5;
+var currentMouseFX = 0.5;
+var currentMouseFY = 0.5;
+
+var currentAmpersandLogoTranslateY = 0;
+var currentAboutTranslateY = 0;
+var currentBananaTranslateY = 0;
+
+var dotSpacing = 7
+var dotEdgeSkipCount = 3;
+var dots = null;
+
+function updateFloatAnimation(windowHeight, windowCenterY, contentElementName, containerElementName, currentTranslateY) {
+	var container = $(containerElementName);
+	var containerHeight = container.innerHeight();
+	var contentCenterY = container.offset().top + containerHeight / 2;
+	var f = (contentCenterY - windowCenterY) / (windowHeight / 2);
+	var targetTranslateY = 0.25 * containerHeight * f;
+	if (Math.abs(currentTranslateY - targetTranslateY) > 1) {
+		currentTranslateY += lerp(0.01, 0.04, 1 - Math.abs(f)) * (targetTranslateY - currentTranslateY);
+		var content = $(contentElementName);
+		content.css({"transform": "translateY(" + currentTranslateY +"px)"});
+	}
+	return currentTranslateY;
+}
+
+var startTimestamp = null;
+var dotAnimationTime = 0;
+var floatAnimationTime = 0;
+var floatUpdateTimestep = 1/30.0 * 1000;
+var dotUpdateTimestep = 1/60.0 * 1000;
+var lastDotMouseForceTime = 0;
+
+var lastWindowCenterY = null;
+
+function update(timestamp) {
+	if (startTimestamp == null) {
+		startTimestamp = timestamp;
+	}
+	var currentAnimationTime = timestamp - startTimestamp;
+
+	// Avoid too large timesteps
+	if (currentAnimationTime - dotAnimationTime > 0.5 * 1000) {
+		dotAnimationTime = currentAnimationTime;
+	}
+	if (currentAnimationTime - dotAnimationTime > 0.5 * 1000) {
+		dotAnimationTime = currentAnimationTime;
+	}
+
+	var windowWidth = $(window).width();
+	var windowHeight = $(window).height();
+
+	var canvas = document.getElementById('dot_canvas');
+
+	while (dotAnimationTime + dotUpdateTimestep < currentAnimationTime) {
+		dotAnimationTime += dotUpdateTimestep;
+
+		// Update dot animation
+		var canvasElement = $("#dot_canvas");
+		
+		// Resize canvas if needed
+		if (Math.abs(canvasElement.width() - canvas.width) > 0.51 ||
+			Math.abs(canvasElement.height() - canvas.height) > 0.51) {
+			console.log("resizing canvas");
+			canvas.setAttribute("width", "" + Math.round(canvasElement.width()));
+			canvas.setAttribute("height", "" + Math.round(canvasElement.height()));
+			dots = null;
+		}
+
+		// Create dots if needed
+		if (dots == null) {
+			dots = [];
+			
+			var xCount = Math.round(canvas.width / dotSpacing - 2 * dotEdgeSkipCount);
+			var yCount = Math.round(canvas.height / dotSpacing - 2 * dotEdgeSkipCount);
+			var offsetX = (canvas.width - (xCount - 1) * dotSpacing) / 2;
+			var offsetY = (canvas.height - (yCount - 1) * dotSpacing) / 2;
+			for (var ix = 0; ix < xCount; ix++) {
+				for (var iy = 0; iy < yCount; iy++) {
+					dot = {}
+					dot.startX = offsetX + ix * dotSpacing;
+					dot.startY = offsetY + iy * dotSpacing;
+					dot.currentX = dot.startX;
+					dot.currentY = dot.startY;
+					dots.push(dot);
+				}
+			}
+
+			lastDotMouseForceTime = dotAnimationTime;
+		}
+
+		// Update dot physics simulation
+		var mousePushSize = 77;
+		var mousePushSize2 = mousePushSize * mousePushSize;
+		var canvasOffset = canvasElement.offset();
+		var canvasMouseX = windowWidth * targetMouseFX - canvasOffset.left;
+		var canvasMouseY = windowHeight * targetMouseFY - canvasOffset.top;
+		for (i = 0; i < dots.length; i++) {
+			var dot = dots[i];
+			
+			dot.currentX += 0.08 * (dot.startX - dot.currentX);
+			dot.currentY += 0.08 * (dot.startY - dot.currentY);
+
+			// Apply mouse out force if the dot is close enough to the mouse
+			var mouseDiffX = dot.currentX - canvasMouseX;
+			var mouseDiffY = dot.currentY - canvasMouseY;
+			if (Math.abs(mouseDiffX) < mousePushSize && Math.abs(mouseDiffY) < mousePushSize) {
+				var mouseOutLength2 = mouseDiffX * mouseDiffX + mouseDiffY * mouseDiffY;
+				var mouseOutForce = Math.max(0, mousePushSize2 - mouseOutLength2) * 0.1;
+				var mouseOutDirX = mouseOutLength2 > 0 ? mouseDiffX / mouseOutLength2 : 0;
+				var mouseOutDirY = mouseOutLength2 > 0 ? mouseDiffY / mouseOutLength2 : 0;
+				dot.currentX += mouseOutDirX * mouseOutForce;
+				dot.currentY +=  mouseOutDirY * mouseOutForce;
+				lastDotMouseForceTime = dotAnimationTime;
+			}
+		}
+	}
+
+	if (dots != null && dotAnimationTime - lastDotMouseForceTime < 1500) {
+		// Redraw dots
+		var ctx = canvas.getContext('2d');
+		ctx.fillStyle = 'rgb(16, 177, 159)';
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+		ctx.fillStyle = 'rgb(8, 100, 90)';
+		for (var i = 0; i < dots.length; i++) {
+			var dot = dots[i];
+			ctx.fillRect(Math.round(dot.currentX), Math.round(dot.currentY), 1, 1);
+		}
+	}
+
+	var windowCenterY = $(window).scrollTop() + windowHeight / 2;
+	if (lastWindowCenterY == null) {
+		lastWindowCenterY = windowCenterY;
+	}
+
+	while (floatAnimationTime + floatUpdateTimestep < currentAnimationTime) {
+		floatAnimationTime += floatUpdateTimestep;
+		// Update mouse hover float animation
+		currentMouseFX += 0.08 * (targetMouseFX - currentMouseFX);
+		currentMouseFY += 0.08 * (targetMouseFY - currentMouseFY);
+		if (Math.abs(currentMouseFX - targetMouseFX) > 0.001 ||
+			Math.abs(currentMouseFY - targetMouseFY) > 0.001) {
+			updateLostChurchLayers(currentMouseFX, currentMouseFY);
+		}
+
+		// Update scroll float animation
+		currentAmpersandLogoTranslateY = updateFloatAnimation(windowHeight, windowCenterY, ".ampersand_logo_content", ".ampersand_logo_container", currentAmpersandLogoTranslateY);
+		currentAboutTranslateY = updateFloatAnimation(windowHeight, windowCenterY, ".about_content", ".about_container", currentAboutTranslateY);
+		currentBananaTranslateY = updateFloatAnimation(windowHeight, windowCenterY, ".banana", ".banana_container", currentBananaTranslateY);
+	}
+
+	// Scrolling doesn't update trigger a mouse move event,
+	// so we have to manually adjust the current mouse position
+	// 
+	targetMouseFY += (windowCenterY - lastWindowCenterY) / windowHeight;
+
+	lastWindowCenterY = windowCenterY;
+
+	// Request next animation frame
+	window.requestAnimationFrame(update);
+}
+
+$( document ).ready(function() {
+	updateLostChurchLayers(0.5, 0.5);
+	window.requestAnimationFrame(update);
+});
+
+$("body").mousemove(function(event) {
+	targetMouseFX = event.pageX / $(window).width();
+	targetMouseFY = event.pageY / $(window).height();
+});
+
+var hasAnimatedIn = false;
+$( window ).scroll(function() {
+	if (!hasAnimatedIn)
+	{
+		$('.mailchimp_container').removeClass('hidden');
+		$('.mailchimp_container').addClass('animated bounceInUp');
+		hasAnimatedIn = true;
+	}
+});
+
+
+</script>
+</body>
+</html>
