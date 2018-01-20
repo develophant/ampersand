@@ -149,9 +149,6 @@ function update(timestamp) {
 	if (currentAnimationTime - dotAnimationTime > 0.5 * 1000) {
 		dotAnimationTime = currentAnimationTime;
 	}
-	if (currentAnimationTime - dotAnimationTime > 0.5 * 1000) {
-		dotAnimationTime = currentAnimationTime;
-	}
 
 	var windowWidth = $(window).width();
 	var windowHeight = $(window).height();
@@ -240,6 +237,10 @@ function update(timestamp) {
 		lastWindowCenterY = windowCenterY;
 	}
 
+	if (currentAnimationTime - floatAnimationTime > 0.5 * 1000) {
+		floatAnimationTime = currentAnimationTime;
+	}
+	
 	while (floatAnimationTime + floatUpdateTimestep < currentAnimationTime) {
 		floatAnimationTime += floatUpdateTimestep;
 		// Update mouse hover float animation
