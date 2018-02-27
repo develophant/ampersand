@@ -96,13 +96,7 @@ body {
   z-index: 0;
 }
 
-@media screen and (min-width: 1000px) {
 
-  #dot_canvas {
-    width: 1000px;
-    margin: 0 auto;
-  }
-}
 .about_container {
   font-family: Verdana;
   text-align: center;
