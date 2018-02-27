@@ -98,7 +98,8 @@ body {
 
 
 .about_container {
-  font-family: Verdana;
+  font-family: Helvetica Neue;
+  font-weight: 200;
   text-align: center;
   padding-top: 7vw;
   padding-bottom: 3vw;
