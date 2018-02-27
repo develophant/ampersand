@@ -74,6 +74,7 @@ body {
   padding-top: 7vw;
   padding-bottom: 7vw;
   background-color: rgb(16, 177, 159);
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
 
 @media screen and (min-width: 1000px) {
