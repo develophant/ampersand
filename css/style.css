@@ -108,6 +108,16 @@ body {
   padding-right: 20%;
 }
 
+.embed_container {
+  font-family: Helvetica Neue;
+  font-weight: 200;
+  text-align: center;
+  padding-top: 7vw;
+  padding-bottom: 3vw;
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
 .about_content {
   padding-bottom: 6px;
 }
