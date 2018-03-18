@@ -118,6 +118,18 @@ body {
   padding-bottom: 6px;
 }
 
+@media screen and (max-width: 640px) {
+  .video_iframe {
+    width: 99vw;
+    height: 56vw;
+  }
+}
+
+.video_container {
+  height: 500px;
+  text-align: center;
+}
+
 .banana_container {
   padding-top: 1vw;
   text-align: center;
