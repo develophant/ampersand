@@ -31,12 +31,12 @@
 <div class="ampersand_logo_container">
 <canvas id="dot_canvas" width="400" height="300">
 </canvas>
-<div class="ampersand_logo_content unselectable">
+<div class="ampersand_logo_content unselectable floaty_fast">
 	ampersand
 </div>
 </div>
 <div class="about_container">
-<div class="about_content">
+<div class="about_content floaty">
 
 hi, we're ampersand!<br />
 
@@ -51,7 +51,7 @@ sign up for our mailing list <br />
 </div>
 </div>
 <div class="banana_container">
-<img class="banana" src="res/banana.png" />
+<img class="banana floaty" src="res/banana.png" />
 </div>
 <div class="bottom_space">
 </div>
@@ -123,18 +123,21 @@ var dotSpacing = 7
 var dotEdgeSkipCount = 0;
 var dots = null;
 
-function updateFloatAnimation(windowHeight, windowCenterY, contentElementName, containerElementName, currentTranslateY) {
-	var container = $(containerElementName);
-	var containerHeight = container.innerHeight();
-	var contentCenterY = container.offset().top + containerHeight / 2;
-	var f = (contentCenterY - windowCenterY) / (windowHeight / 2);
-	var targetTranslateY = 0.25 * containerHeight * f;
-	if (Math.abs(currentTranslateY - targetTranslateY) > 1) {
-		currentTranslateY += lerp(0.01, 0.04, 1 - Math.abs(f)) * (targetTranslateY - currentTranslateY);
-		var content = $(contentElementName);
-		content.css({"transform": "translateY(" + currentTranslateY +"px)"});
-	}
-	return currentTranslateY;
+function updateFloatyAnimation(content, windowHeight, windowCenterY, speed) {
+    var container = content.parent();
+    var containerHeight = container.innerHeight();
+    var contentCenterY = container.offset().top + containerHeight / 2;
+    var f = (contentCenterY - windowCenterY) / (windowHeight / 2);
+    var targetTranslateY = 0.25 * containerHeight * f;
+    var currentTranslateY = content.data("currentTranslateY")
+    if (!currentTranslateY) {
+        currentTranslateY = 0.0
+    }
+    if (Math.abs(currentTranslateY - targetTranslateY) > 1) {
+        currentTranslateY += lerp(0.01 * speed, 0.04 * speed, 1 - Math.abs(f)) * (targetTranslateY - currentTranslateY);
+        content.css({"transform": "translateY(" + currentTranslateY +"px)"});
+        content.data("currentTranslateY", currentTranslateY)
+    }
 }
 
 var startTimestamp = null;
@@ -258,11 +261,16 @@ function update(timestamp) {
 			updateLostChurchLayers(currentMouseFX, currentMouseFY);
 		}
 
-		// Update scroll float animation
-		currentAmpersandLogoTranslateY = updateFloatAnimation(windowHeight, windowCenterY, ".ampersand_logo_content", ".ampersand_logo_container", currentAmpersandLogoTranslateY);
-		currentAboutTranslateY = updateFloatAnimation(windowHeight, windowCenterY, ".about_content", ".about_container", currentAboutTranslateY);
-		currentBananaTranslateY = updateFloatAnimation(windowHeight, windowCenterY, ".banana", ".banana_container", currentBananaTranslateY);
-	}
+		// Update floaty animation for normal speed elements
+        $( ".floaty").each(function( index ) {
+            updateFloatyAnimation($(this), windowHeight, windowCenterY, 1.0);
+        });
+
+        // Update floaty animation for faster elements
+        $( ".floaty_fast").each(function( index ) {
+            updateFloatyAnimation($(this), windowHeight, windowCenterY, 2.0);
+        });
+    }
 
 	// Scrolling doesn't update trigger a mouse move event,
 	// so we have to manually adjust the current mouse position
