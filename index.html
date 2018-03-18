@@ -29,16 +29,20 @@
 <div class="about_container">
 <div class="about_content">
 
-<p>Hi, we're Ampersand!</p>
+hi, we're ampersand!<br />
 
-<p>Thanks for stalking us.</p>
+thanks for stalking us<br />
 
-<p>Listen to music.</p>
-
+this website is under construction <br />
+<br />
+you can still: <br />
+listen to our music <br />
+play with the dots <br />
+sign up for our mailing list <br />
 </div>
 </div>
 <div class="banana_container">
-<img class="banana" src="res/combined_ampersands.png" />
+<img class="banana" src="res/banana.png" />
 </div>
 <div class="bottom_space">
 </div>
@@ -47,14 +51,14 @@
 <!-- Begin MailChimp Signup Form -->
 <link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
 <style type="text/css">
-    #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif;  width:250px;}
+    #mc_embed_signup{clear:left; font:14px Helvetica,Arial,sans-serif; color:#fff; width:250px;}
     /* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
        We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
 </style>
 <div id="mc_embed_signup">
 <form action="https://ampersandtheband.us17.list-manage.com/subscribe/post?u=db1d237bcea8cd062ad3b5a46&amp;id=d4763e67d0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
     <div id="mc_embed_signup_scroll">
-    <label for="mce-EMAIL">Subscribe to our mailing list</label>
+    <label for="mce-EMAIL">Don't miss out</label>
     <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
     <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
     <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_db1d237bcea8cd062ad3b5a46_d4763e67d0" tabindex="-1" value=""></div>
@@ -64,7 +68,7 @@
 </div>
 </div>
 <div class="bottom_bar">
-<iframe style="border: 0; width: 100%; height: 120px;" src="https://bandcamp.com/EmbeddedPlayer/album=4073138659/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/" seamless><a href="http://ampersand-sf.bandcamp.com/album/live-at-antons-apartment">Live at Anton&#39;s Apartment by Ampersand</a></iframe>
+<iframe style="border: 0; width: 100%; height: 120px;" src="https://bandcamp.com/EmbeddedPlayer/album=4073138659/size=large/bgcol=ffffff/linkcol=062237/tracklist=false/artwork=none/transparent=true/" seamless><a href="http://ampersand-sf.bandcamp.com/album/live-at-antons-apartment">Listen to Ampersand</a></iframe>
 </div>
 <script>
 
@@ -216,10 +220,10 @@ function update(timestamp) {
 	if (dots != null && dotAnimationTime - lastDotMouseForceTime < 1500) {
 		// Redraw dots
 		var ctx = canvas.getContext('2d');
-		ctx.fillStyle = 'rgb(16, 177, 159)';
+		ctx.fillStyle = 'rgb(6,34,55)';
 		ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-		ctx.fillStyle = 'rgb(8, 100, 90)';
+		ctx.fillStyle = 'rgb(247, 19, 102)';
 		for (var i = 0; i < dots.length; i++) {
 			var dot = dots[i];
 			ctx.fillRect(Math.round(dot.currentX), Math.round(dot.currentY), 1, 1);

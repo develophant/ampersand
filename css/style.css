@@ -1,7 +1,7 @@
 body {
   margin: 0px;
   padding: 0px;
-  background-color: rgb(235,236,230);
+  background-color: rgb(6,34,55);
   height: 100%;
 }
 
@@ -73,7 +73,7 @@ body {
   color: white;
   padding-top: 7vw;
   padding-bottom: 7vw;
-  background-color: rgb(16, 177, 159);
+  background-color: rgb(6,34,55);
   text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
 
@@ -100,6 +100,7 @@ body {
 
 .about_container {
   font-family: Helvetica Neue;
+  color:#fff;
   font-weight: 200;
   text-align: center;
   padding-top: 7vw;
@@ -120,7 +121,7 @@ body {
 
 .banana {
   width: 60vw;
-  max-width: 1000px;
+  max-width: 100px;
 }
 
 .bottom_bar {
@@ -141,7 +142,7 @@ body {
     left: auto;
     top: auto;
     width: 250px;
-    height: 150px;
+    height: 270px;
 }
 .hidden { visibility: hidden; }
 
