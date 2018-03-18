@@ -29,6 +29,31 @@ body {
   height: 103%;
 }
 
+.hidden_bandcamp_player {
+  position: absolute;
+  top: 10.44%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+ margin-right: auto;
+  width: 66px;
+  height: 180px;
+  opacity: 0.0;
+  transform: scale(5);
+}
+
+.play_button {
+  position: absolute;
+  top: 5.44%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+ margin-right: auto;
+  width: 200px;
+  height: 200px;
+  pointer-events: none;
+}
+
 .lost_church_anton {
   position: absolute;
   top: 2.44%;

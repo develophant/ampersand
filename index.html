@@ -1,6 +1,6 @@
 <html>
  <head>
- 	<!-- Global Site Tag (gtag.js) - Google Analytics -->
+     <!-- Global Site Tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109662935-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -25,6 +25,11 @@
 <img class="lost_church_dean" src="res/lost_church_layers/lost_church_dean.png" />
 <img class="lost_church_andrea" src="res/lost_church_layers/lost_church_andrea.png" />
 
+<div class="hidden_bandcamp_player">
+<iframe id="bandcamp_player" style="border: 0; width: 100%; height: 120px;" src="https://bandcamp.com/EmbeddedPlayer/album=4073138659/size=large/bgcol=ffffff/linkcol=062237/tracklist=false/artwork=none/transparent=true/" seamless><a href="http://ampersand-sf.bandcamp.com/album/live-at-antons-apartment">Listen to Ampersand</a></iframe>
+</div>
+
+<img class="play_button" src="res/play_button.png" />
 </div>
 </div>
 
@@ -32,7 +37,7 @@
 <canvas id="dot_canvas" width="400" height="300">
 </canvas>
 <div class="ampersand_logo_content unselectable floaty_fast">
-	ampersand
+    ampersand
 </div>
 </div>
 <div class="about_container">
@@ -79,38 +84,35 @@ sign up for our mailing list <br />
 </form>
 </div>
 </div>
-<div class="bottom_bar">
-<iframe style="border: 0; width: 100%; height: 120px;" src="https://bandcamp.com/EmbeddedPlayer/album=4073138659/size=large/bgcol=ffffff/linkcol=062237/tracklist=false/artwork=none/transparent=true/" seamless><a href="http://ampersand-sf.bandcamp.com/album/live-at-antons-apartment">Listen to Ampersand</a></iframe>
-</div>
 <script>
 
 function lerp(value1, value2, amount) {
-	amount = amount < 0 ? 0 : amount;
-	amount = amount > 1 ? 1 : amount;
-	return value1 + (value2 - value1) * amount;
+    amount = amount < 0 ? 0 : amount;
+    amount = amount > 1 ? 1 : amount;
+    return value1 + (value2 - value1) * amount;
 };
 
 function updateLostChurchLayers(fx, fy) {
-	$(".lost_church_background").css(
-		{"left": lerp(-0.03, 0, fx) * 100 + "%",
-		"top":lerp(-0.03, 0, fy) * 100 + "%"
-	});
-	$(".lost_church_anton").css(
-		{"left": lerp(0.25, 0.26, fx) * 100 + "%",
-		"top":lerp(-0.19, -0.17, fy) * 100 + "%"
-	});
-	$(".lost_church_reuben").css(
-		{"left": lerp(-0.05, 0.0, fx) * 100 + "%",
-		"top":lerp(0.0, 0.05, fy) * 100 + "%"
-	});
-	$(".lost_church_andrea").css(
-		{"left": lerp(0.13, 0.2, fx) * 100 + "%",
-		"top":lerp(0.13, 0.2, fy) * 100 + "%"
-	});
-	$(".lost_church_dean").css(
-		{"left": lerp(0.79, 0.83, fx) * 100 + "%",
-		"top":lerp(0.05, 0.1, fy) * 100 + "%"
-	});
+    $(".lost_church_background").css(
+        {"left": lerp(-0.03, 0, fx) * 100 + "%",
+        "top":lerp(-0.03, 0, fy) * 100 + "%"
+    });
+    $(".lost_church_anton").css(
+        {"left": lerp(0.25, 0.26, fx) * 100 + "%",
+        "top":lerp(-0.19, -0.17, fy) * 100 + "%"
+    });
+    $(".lost_church_reuben").css(
+        {"left": lerp(-0.05, 0.0, fx) * 100 + "%",
+        "top":lerp(0.0, 0.05, fy) * 100 + "%"
+    });
+    $(".lost_church_andrea").css(
+        {"left": lerp(0.13, 0.2, fx) * 100 + "%",
+        "top":lerp(0.13, 0.2, fy) * 100 + "%"
+    });
+    $(".lost_church_dean").css(
+        {"left": lerp(0.79, 0.83, fx) * 100 + "%",
+        "top":lerp(0.05, 0.1, fy) * 100 + "%"
+    });
 }
 
 var targetMouseFX = 0.5;
@@ -153,118 +155,118 @@ var lastDotMouseForceTime = 0;
 var lastWindowCenterY = null;
 
 function update(timestamp) {
-	if (startTimestamp == null) {
-		startTimestamp = timestamp;
-	}
-	var currentAnimationTime = timestamp - startTimestamp;
+    if (startTimestamp == null) {
+        startTimestamp = timestamp;
+    }
+    var currentAnimationTime = timestamp - startTimestamp;
 
-	// Avoid too large timesteps
-	if (currentAnimationTime - dotAnimationTime > 0.5 * 1000) {
-		dotAnimationTime = currentAnimationTime;
-	}
+    // Avoid too large timesteps
+    if (currentAnimationTime - dotAnimationTime > 0.5 * 1000) {
+        dotAnimationTime = currentAnimationTime;
+    }
 
-	var windowWidth = $(window).width();
-	var windowHeight = $(window).height();
+    var windowWidth = $(window).width();
+    var windowHeight = $(window).height();
 
-	var canvas = document.getElementById('dot_canvas');
+    var canvas = document.getElementById('dot_canvas');
 
-	while (dotAnimationTime + dotUpdateTimestep < currentAnimationTime) {
-		dotAnimationTime += dotUpdateTimestep;
+    while (dotAnimationTime + dotUpdateTimestep < currentAnimationTime) {
+        dotAnimationTime += dotUpdateTimestep;
 
-		// Update dot animation
-		var canvasElement = $("#dot_canvas");
-		
-		// Resize canvas if needed
-		if (Math.abs(canvasElement.width() - canvas.width) > 0.51 ||
-			Math.abs(canvasElement.height() - canvas.height) > 0.51) {
-			console.log("resizing canvas");
-			canvas.setAttribute("width", "" + Math.round(canvasElement.width()));
-			canvas.setAttribute("height", "" + Math.round(canvasElement.height()));
-			dots = null;
-		}
+        // Update dot animation
+        var canvasElement = $("#dot_canvas");
+        
+        // Resize canvas if needed
+        if (Math.abs(canvasElement.width() - canvas.width) > 0.51 ||
+            Math.abs(canvasElement.height() - canvas.height) > 0.51) {
+            console.log("resizing canvas");
+            canvas.setAttribute("width", "" + Math.round(canvasElement.width()));
+            canvas.setAttribute("height", "" + Math.round(canvasElement.height()));
+            dots = null;
+        }
 
-		// Create dots if needed
-		if (dots == null) {
-			dots = [];
-			
-			var xCount = Math.round(canvas.width / dotSpacing - 2 * dotEdgeSkipCount);
-			var yCount = Math.round(canvas.height / dotSpacing - 2 * dotEdgeSkipCount);
-			var offsetX = (canvas.width - (xCount - 1) * dotSpacing) / 2;
-			var offsetY = (canvas.height - (yCount - 1) * dotSpacing) / 2;
-			for (var ix = 0; ix < xCount; ix++) {
-				for (var iy = 0; iy < yCount; iy++) {
-					dot = {}
-					dot.startX = offsetX + ix * dotSpacing;
-					dot.startY = offsetY + iy * dotSpacing;
-					dot.currentX = dot.startX;
-					dot.currentY = dot.startY;
-					dots.push(dot);
-				}
-			}
+        // Create dots if needed
+        if (dots == null) {
+            dots = [];
+            
+            var xCount = Math.round(canvas.width / dotSpacing - 2 * dotEdgeSkipCount);
+            var yCount = Math.round(canvas.height / dotSpacing - 2 * dotEdgeSkipCount);
+            var offsetX = (canvas.width - (xCount - 1) * dotSpacing) / 2;
+            var offsetY = (canvas.height - (yCount - 1) * dotSpacing) / 2;
+            for (var ix = 0; ix < xCount; ix++) {
+                for (var iy = 0; iy < yCount; iy++) {
+                    dot = {}
+                    dot.startX = offsetX + ix * dotSpacing;
+                    dot.startY = offsetY + iy * dotSpacing;
+                    dot.currentX = dot.startX;
+                    dot.currentY = dot.startY;
+                    dots.push(dot);
+                }
+            }
 
-			lastDotMouseForceTime = dotAnimationTime;
-		}
+            lastDotMouseForceTime = dotAnimationTime;
+        }
 
-		// Update dot physics simulation
-		var mousePushSize = 77;
-		var mousePushSize2 = mousePushSize * mousePushSize;
-		var canvasOffset = canvasElement.offset();
-		var canvasMouseX = windowWidth * targetMouseFX - canvasOffset.left;
-		var canvasMouseY = windowHeight * targetMouseFY - canvasOffset.top;
-		for (i = 0; i < dots.length; i++) {
-			var dot = dots[i];
-			
-			dot.currentX += 0.08 * (dot.startX - dot.currentX);
-			dot.currentY += 0.08 * (dot.startY - dot.currentY);
+        // Update dot physics simulation
+        var mousePushSize = 77;
+        var mousePushSize2 = mousePushSize * mousePushSize;
+        var canvasOffset = canvasElement.offset();
+        var canvasMouseX = windowWidth * targetMouseFX - canvasOffset.left;
+        var canvasMouseY = windowHeight * targetMouseFY - canvasOffset.top;
+        for (i = 0; i < dots.length; i++) {
+            var dot = dots[i];
+            
+            dot.currentX += 0.08 * (dot.startX - dot.currentX);
+            dot.currentY += 0.08 * (dot.startY - dot.currentY);
 
-			// Apply mouse out force if the dot is close enough to the mouse
-			var mouseDiffX = dot.currentX - canvasMouseX;
-			var mouseDiffY = dot.currentY - canvasMouseY;
-			if (Math.abs(mouseDiffX) < mousePushSize && Math.abs(mouseDiffY) < mousePushSize) {
-				var mouseOutLength2 = mouseDiffX * mouseDiffX + mouseDiffY * mouseDiffY;
-				var mouseOutForce = Math.max(0, mousePushSize2 - mouseOutLength2) * 0.1;
-				var mouseOutDirX = mouseOutLength2 > 0 ? mouseDiffX / mouseOutLength2 : 0;
-				var mouseOutDirY = mouseOutLength2 > 0 ? mouseDiffY / mouseOutLength2 : 0;
-				dot.currentX += mouseOutDirX * mouseOutForce;
-				dot.currentY +=  mouseOutDirY * mouseOutForce;
-				lastDotMouseForceTime = dotAnimationTime;
-			}
-		}
-	}
+            // Apply mouse out force if the dot is close enough to the mouse
+            var mouseDiffX = dot.currentX - canvasMouseX;
+            var mouseDiffY = dot.currentY - canvasMouseY;
+            if (Math.abs(mouseDiffX) < mousePushSize && Math.abs(mouseDiffY) < mousePushSize) {
+                var mouseOutLength2 = mouseDiffX * mouseDiffX + mouseDiffY * mouseDiffY;
+                var mouseOutForce = Math.max(0, mousePushSize2 - mouseOutLength2) * 0.1;
+                var mouseOutDirX = mouseOutLength2 > 0 ? mouseDiffX / mouseOutLength2 : 0;
+                var mouseOutDirY = mouseOutLength2 > 0 ? mouseDiffY / mouseOutLength2 : 0;
+                dot.currentX += mouseOutDirX * mouseOutForce;
+                dot.currentY +=  mouseOutDirY * mouseOutForce;
+                lastDotMouseForceTime = dotAnimationTime;
+            }
+        }
+    }
 
-	if (dots != null && dotAnimationTime - lastDotMouseForceTime < 1500) {
-		// Redraw dots
-		var ctx = canvas.getContext('2d');
-		ctx.fillStyle = 'rgb(6,34,55)';
-		ctx.fillRect(0, 0, canvas.width, canvas.height);
+    if (dots != null && dotAnimationTime - lastDotMouseForceTime < 1500) {
+        // Redraw dots
+        var ctx = canvas.getContext('2d');
+        ctx.fillStyle = 'rgb(6,34,55)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-		ctx.fillStyle = 'rgb(247, 19, 102)';
-		for (var i = 0; i < dots.length; i++) {
-			var dot = dots[i];
-			ctx.fillRect(Math.round(dot.currentX), Math.round(dot.currentY), 1, 1);
-		}
-	}
+        ctx.fillStyle = 'rgb(247, 19, 102)';
+        for (var i = 0; i < dots.length; i++) {
+            var dot = dots[i];
+            ctx.fillRect(Math.round(dot.currentX), Math.round(dot.currentY), 1, 1);
+        }
+    }
 
-	var windowCenterY = $(window).scrollTop() + windowHeight / 2;
-	if (lastWindowCenterY == null) {
-		lastWindowCenterY = windowCenterY;
-	}
+    var windowCenterY = $(window).scrollTop() + windowHeight / 2;
+    if (lastWindowCenterY == null) {
+        lastWindowCenterY = windowCenterY;
+    }
 
-	if (currentAnimationTime - floatAnimationTime > 0.5 * 1000) {
-		floatAnimationTime = currentAnimationTime;
-	}
-	
-	while (floatAnimationTime + floatUpdateTimestep < currentAnimationTime) {
-		floatAnimationTime += floatUpdateTimestep;
-		// Update mouse hover float animation
-		currentMouseFX += 0.08 * (targetMouseFX - currentMouseFX);
-		currentMouseFY += 0.08 * (targetMouseFY - currentMouseFY);
-		if (Math.abs(currentMouseFX - targetMouseFX) > 0.001 ||
-			Math.abs(currentMouseFY - targetMouseFY) > 0.001) {
-			updateLostChurchLayers(currentMouseFX, currentMouseFY);
-		}
+    if (currentAnimationTime - floatAnimationTime > 0.5 * 1000) {
+        floatAnimationTime = currentAnimationTime;
+    }
+    
+    while (floatAnimationTime + floatUpdateTimestep < currentAnimationTime) {
+        floatAnimationTime += floatUpdateTimestep;
+        // Update mouse hover float animation
+        currentMouseFX += 0.08 * (targetMouseFX - currentMouseFX);
+        currentMouseFY += 0.08 * (targetMouseFY - currentMouseFY);
+        if (Math.abs(currentMouseFX - targetMouseFX) > 0.001 ||
+            Math.abs(currentMouseFY - targetMouseFY) > 0.001) {
+            updateLostChurchLayers(currentMouseFX, currentMouseFY);
+        }
 
-		// Update floaty animation for normal speed elements
+        // Update floaty animation for normal speed elements
         $( ".floaty").each(function( index ) {
             updateFloatyAnimation($(this), windowHeight, windowCenterY, 1.0);
         });
@@ -275,37 +277,61 @@ function update(timestamp) {
         });
     }
 
-	// Scrolling doesn't update trigger a mouse move event,
-	// so we have to manually adjust the current mouse position
-	// 
-	targetMouseFY += (windowCenterY - lastWindowCenterY) / windowHeight;
+    // Scrolling doesn't update trigger a mouse move event,
+    // so we have to manually adjust the current mouse position
+    // 
+    targetMouseFY += (windowCenterY - lastWindowCenterY) / windowHeight;
 
-	lastWindowCenterY = windowCenterY;
+    lastWindowCenterY = windowCenterY;
 
-	// Request next animation frame
-	window.requestAnimationFrame(update);
+
+    // See if we are clicking the bandcamp player at the top
+    
+    if (!hasClickedPlayer)
+    {
+        var elem = document.activeElement;
+        if(elem && elem.id == 'bandcamp_player')
+        {
+        	console.log("clicked!");
+            hasClickedPlayer = true;
+            $(".play_button").hide();
+            // Show the player after a small delay.
+            // We had a delay, otherwise the play click doesn't go through.
+            setTimeout(function() {
+            	$('.hidden_bandcamp_player').toggleClass('hidden_bandcamp_player bottom_bar').addClass('animated bounceInUp');
+            }, 100);
+            
+        }
+    }
+
+    // Request next animation frame
+    window.requestAnimationFrame(update);
 }
 
+var hasClickedPlayer = false;
+
 $( document ).ready(function() {
-	updateLostChurchLayers(0.5, 0.5);
-	window.requestAnimationFrame(update);
+    updateLostChurchLayers(0.5, 0.5);
+    window.requestAnimationFrame(update);
 });
 
 $("body").mousemove(function(event) {
-	targetMouseFX = event.pageX / $(window).width();
-	targetMouseFY = event.pageY / $(window).height();
+    targetMouseFX = event.pageX / $(window).width();
+    targetMouseFY = event.pageY / $(window).height();
 });
 
 var hasAnimatedIn = false;
 $( window ).scroll(function() {
-	if (!hasAnimatedIn)
-	{
-		$('.mailchimp_container').removeClass('hidden');
-		$('.mailchimp_container').addClass('animated bounceInUp');
-		hasAnimatedIn = true;
-	}
+    if (!hasAnimatedIn)
+    {
+        $('.mailchimp_container').removeClass('hidden');
+        $('.mailchimp_container').addClass('animated bounceInUp');
+        hasAnimatedIn = true;
+    }
 });
-
+$(document).ready( function(){
+    // or whichever effect you prefer
+});
 
 </script>
 </body>
