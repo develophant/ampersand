@@ -65,6 +65,11 @@ body {
     src: url('../res/fonts/ZnikomitNo24Thin.otf')
 }
 
+@font-face{
+    font-family: "HelveticaNeue-Thin";
+    src: url('../res/fonts/HelveticaNeue-Thin.otf')
+}
+
 .ampersand_logo_container {
   position: relative;
   font-size: 12vw;
@@ -99,7 +104,7 @@ body {
 
 
 .about_container {
-  font-family: Helvetica Neue;
+  font-family: HelveticaNeue-Thin;
   color:#fff;
   font-weight: 200;
   text-align: center;
