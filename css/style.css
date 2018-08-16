@@ -149,8 +149,13 @@ body {
   }
 }
 
+.video_list_container {
+  height: 800px;
+  text-align: center;
+}
+
 .video_container {
-  height: 500px;
+  height: 350px;
   text-align: center;
 }
 

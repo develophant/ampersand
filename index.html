@@ -55,8 +55,13 @@ play with the dots <br />
 sign up for our mailing list <br />
 </div>
 </div>
+<div class="video_list_container">
 <div class="video_container">
-<iframe class="video_iframe floaty" src="https://drive.google.com/file/d/1IKIxV0Z0mdazDwPQYUANUWc-f_s4EFLl/preview" width="640" height="360" frameBorder="0"></iframe>
+    <iframe class="video_iframe floaty" width="560" height="315" src="https://www.youtube.com/embed/UmjXC_8zDtU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
+<div class="video_container">
+    <iframe class="video_iframe floaty" width="560" height="315" src="https://www.youtube.com/embed/64FfEiaK-SI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
 </div>
 <div class="banana_container">
 <img class="banana floaty" src="res/banana.png" />
@@ -296,7 +301,7 @@ function update(timestamp) {
             hasClickedPlayer = true;
             $(".play_button").hide();
             // Show the player after a small delay.
-            // We had a delay, otherwise the play click doesn't go through.
+            // We have a delay, otherwise the play click doesn't go through.
             setTimeout(function() {
             	$('.hidden_bandcamp_player').toggleClass('hidden_bandcamp_player bottom_bar').addClass('animated bounceInUp');
             }, 100);
